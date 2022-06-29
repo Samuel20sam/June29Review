@@ -40,7 +40,9 @@ public class Main {
         //Accessing the address book - method 2
         addressBookMap.forEach((k, v) -> System.out.println("\n" + "key " + k + "\n" + "value " + v));
 
-        List<Contact> name = addressBookMap.get("addressBook1").list.stream().filter(x -> x.city.equals("Chennai")).toList();
-        System.out.println("\n" +name);
+        List<Contact> nameOne = addressBookMap.get("addressBook1").list.stream().filter(x -> x.firstName.equals("Kevin")).toList();
+        System.out.println("\n" +nameOne);
+        List<Contact> nameTwo = addressBookMap.get("addressBook2").list.stream().filter(x -> x.firstName.equals("Magesh")).toList();
+        System.out.println("\n" +nameTwo);
     }
 }
