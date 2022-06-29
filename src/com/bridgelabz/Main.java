@@ -1,46 +1,46 @@
 package com.bridgelabz;
 
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
-    Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-
-        AddressBook ab = new AddressBook();
-        Main main = new Main();
-
         //Creating first address book
-        System.out.println("Enter first book name");
-        String bookName1 = main.in.next();
-        ab.map.put(bookName1, new LinkedList<>());
+        AddressBook addressBook1 = new AddressBook();
         Contact c1 = new Contact("Samuel", "Elijah", "Chennai");
-        ab.map.get(bookName1).add(c1);
+        addressBook1.list.add(c1);
         Contact c2 = new Contact("Kevin", "Raymond", "Pune");
-        ab.map.get(bookName1).add(c2);
-        Contact c3 = new Contact("Hardy", "Cooper", "Cochin");
-        ab.map.get(bookName1).add(c3);
+        addressBook1.list.add(c2);
+        Contact c3 = new Contact("Hardy", "Cooper", "Chennai");
+        addressBook1.list.add(c3);
 
         //Creating second address book
-        System.out.println("Enter second book name");
-        String bookName2 = main.in.next();
-        ab.map.put(bookName2, new LinkedList<>());
-        Contact c4 = new Contact("Naren", "Vinay", "Kolkata");
-        ab.map.get(bookName2).add(c4);
-        Contact c5 = new Contact("Pavan", "Roy", "Mumbai");
-        ab.map.get(bookName2).add(c5);
+        AddressBook addressBook2 = new AddressBook();
+        Contact c4 = new Contact("Venkatesh", "Bhatt", "Kolkata");
+        addressBook2.list.add(c4);
+        Contact c5 = new Contact("Pradeep", "Reddy", "Mumbai");
+        addressBook2.list.add(c5);
         Contact c6 = new Contact("Magesh", "Kumar", "Delhi");
-        ab.map.get(bookName2).add(c6);
+        addressBook2.list.add(c6);
 
-        System.out.println(ab.map);
+        Map<String, AddressBook> addressBookMap = new LinkedHashMap<>();
+        addressBookMap.put("addressBook1", addressBook1);
+        addressBookMap.put("addressBook2", addressBook2);
 
-        System.out.println("Enter the Name that needs to be searched");
-        String fn = main.in.next();
-        for (String key : ab.map.keySet()) {
-            for (Contact info : ab.map.get(key)) {
-                }
-            }
-        }
+        //Accessing the address book - method 1
+        System.out.println("\n" + addressBookMap.get("addressBook1"));
+        System.out.println("\n" + addressBookMap.get("addressBook2"));
+
+        //Accessing the address book - method 2
+        for (Map.Entry<String, AddressBook> e : addressBookMap.entrySet())
+            System.out.println("\n" + e.getKey() + " " + e.getValue());
+
+        //Accessing the address book - method 2
+        addressBookMap.forEach((k, v) -> System.out.println("\n" + "key " + k + "\n" + "value " + v));
+
+        List<Contact> name = addressBookMap.get("addressBook1").list.stream().filter(x -> x.city.equals("Chennai")).toList();
+        System.out.println("\n" +name);
     }
 }
