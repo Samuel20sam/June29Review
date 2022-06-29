@@ -18,11 +18,11 @@ public class Main {
 
         //Creating second address book
         AddressBook addressBook2 = new AddressBook();
-        Contact c4 = new Contact("Venkatesh", "Bhatt", "Kolkata");
+        Contact c4 = new Contact("Venkat", "Kumar", "Kolkata");
         addressBook2.list.add(c4);
         Contact c5 = new Contact("Pradeep", "Reddy", "Mumbai");
         addressBook2.list.add(c5);
-        Contact c6 = new Contact("Magesh", "Kumar", "Delhi");
+        Contact c6 = new Contact("Kiran", "Roy", "Delhi");
         addressBook2.list.add(c6);
 
         Map<String, AddressBook> addressBookMap = new LinkedHashMap<>();
@@ -42,7 +42,7 @@ public class Main {
 
         List<Contact> nameOne = addressBookMap.get("addressBook1").list.stream().filter(x -> x.firstName.equals("Kevin")).toList();
         System.out.println("\n" +nameOne);
-        List<Contact> nameTwo = addressBookMap.get("addressBook2").list.stream().filter(x -> x.firstName.equals("Magesh")).toList();
+        List<Contact> nameTwo = addressBookMap.get("addressBook2").list.stream().filter(x -> x.firstName.equals("Pradeep")).toList();
         System.out.println("\n" +nameTwo);
     }
 }
