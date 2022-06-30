@@ -1,10 +1,17 @@
 package com.bridgelabz;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class AddressBook {
-    Map<String, List<Contact>> map = new LinkedHashMap<>();
+    ArrayList<Contact> list = new ArrayList<>();
 
+    ArrayList<String> cityList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "AddressBook{" +
+                "list=" + list +
+                ", cityList=" + cityList +
+                '}';
+    }
 }
