@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class AddressBook {
     ArrayList<Contact> list = new ArrayList<>();
-
     ArrayList<String> cityList = new ArrayList<>();
 
     @Override

@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class Main {
 
         //Creating second address book
         AddressBook addressBook2 = new AddressBook();
-        Contact c4 = new Contact("Venkat", "Kumar", "Kolkata");
+        Contact c4 = new Contact("Kevin", "Kumar", "Kolkata");
         addressBook2.list.add(c4);
         Contact c5 = new Contact("Pradeep", "Reddy", "Mumbai");
         addressBook2.list.add(c5);
@@ -33,17 +34,15 @@ public class Main {
         System.out.println("\n" + addressBookMap.get("addressBook1"));
         System.out.println("\n" + addressBookMap.get("addressBook2"));
 
-        //Accessing the address book - method 2
-        for (Map.Entry<String, AddressBook> e : addressBookMap.entrySet())
-            System.out.println("\n" + e.getKey() + " " + e.getValue());
-
         //Accessing the address book - method 3
         addressBookMap.forEach((k, v) -> System.out.println("\n" + "key " + k + "\n" + "value " + v));
 
-        List<Contact> nameOne = addressBookMap.get("addressBook1").list.stream().filter(x -> x.firstName.equals("Kevin")).toList();
-        System.out.println("\n" +nameOne);
-        List<Contact> nameTwo = addressBookMap.get("addressBook2").list.stream().filter(x -> x.firstName.equals("Pradeep")).toList();
-        System.out.println("\n" +nameTwo);
+        List<Contact> nameOne = new ArrayList<>();
+        for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()){
+            AddressBook ab = addressBookMap.get(entry.getKey());
+            List<Contact> nameList = ab.list.stream().filter(x -> x.firstName.equals("Kevin")).toList();
+            nameOne.addAll(nameList);
+        }  System.out.println("\ntesting " +nameOne);
 
         AddressBook addressBook3 = new AddressBook();
         addressBook3.cityList.add(c1.city);
@@ -60,6 +59,5 @@ public class Main {
             System.out.println("\n" + e.getKey() + " " + e.getValue());
 
         cityNameMap.forEach((k, v) -> System.out.println("\n" + "key " + k + "\n" + "value " + v));
-
     }
 }
