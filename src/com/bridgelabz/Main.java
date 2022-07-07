@@ -34,30 +34,32 @@ public class Main {
         System.out.println("\n" + addressBookMap.get("addressBook1"));
         System.out.println("\n" + addressBookMap.get("addressBook2"));
 
-        //Accessing the address book - method 3
+        //Accessing the address book - method 2
         addressBookMap.forEach((k, v) -> System.out.println("\n" + "key " + k + "\n" + "value " + v));
 
         List<Contact> nameOne = new ArrayList<>();
-        for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()){
+        for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
             AddressBook ab = addressBookMap.get(entry.getKey());
             List<Contact> nameList = ab.list.stream().filter(x -> x.firstName.equals("Kevin")).toList();
             nameOne.addAll(nameList);
-        }  System.out.println("\ntesting " +nameOne);
+        }
+        System.out.println("\ntesting " + nameOne);
 
-        AddressBook addressBook3 = new AddressBook();
-        addressBook3.cityList.add(c1.city);
-        addressBook3.cityList.add(c2.city);
-        addressBook3.cityList.add(c3.city);
-        addressBook3.cityList.add(c4.city);
-        addressBook3.cityList.add(c5.city);
-        addressBook3.cityList.add(c6.city);
+        Map<String, List<Contact>> cityNameMap = new LinkedHashMap<>();
 
-        Map<String, AddressBook> cityNameMap = new LinkedHashMap<>();
-        cityNameMap.put("cityName", addressBook3);
-
-        for (Map.Entry<String, AddressBook> e : cityNameMap.entrySet())
-            System.out.println("\n" + e.getKey() + " " + e.getValue());
-
-        cityNameMap.forEach((k, v) -> System.out.println("\n" + "key " + k + "\n" + "value " + v));
+        for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
+            AddressBook ab = addressBookMap.get(entry.getKey());
+            ab.list.forEach(element -> {
+                if (cityNameMap.containsKey(element.getCity())) {
+                    List<Contact> list = cityNameMap.get(element.getCity());
+                    list.add(element);
+                } else {
+                    List<Contact> list = new ArrayList<>();
+                    list.add(element);
+                    cityNameMap.put(element.getCity(), list);
+                }
+            });
+        }
+        System.out.println("\nCity Name Map contains:" +cityNameMap);
     }
 }
